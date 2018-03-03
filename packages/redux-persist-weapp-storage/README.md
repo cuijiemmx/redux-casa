@@ -1,6 +1,7 @@
 # redux-persist-weapp-storage
 
 A simple redux-persist storage engine for weapp (微信小程序)
+Also support wepy
 
 ## install
 
