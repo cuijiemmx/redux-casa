@@ -1,0 +1,22 @@
+{
+  "name": "redux-persist-weapp-storage",
+  "version": "1.0.0",
+  "description": "redux-persist storage engine for wechat app",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "babel src -d lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redux",
+    "persist",
+    "wechat",
+    "weapp",
+    "wxapp",
+    "mini",
+    "program"
+  ],
+  "author": "cuijiemmx",
+  "license": "ISC"
+}
