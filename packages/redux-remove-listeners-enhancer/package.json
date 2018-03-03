@@ -1,6 +1,6 @@
 {
   "name": "redux-remove-listeners-enhancer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "add a clearListeners method to created store to batch remove all listeners",
   "main": "lib/index.js",
   "scripts": {
