@@ -1,0 +1,23 @@
+{
+  "name": "redux-remove-listeners-enhancer",
+  "version": "1.0.2",
+  "description": "add a clearListeners method to created store to batch remove all listeners",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "npm run build",
+    "test": "babel-node test/index.js"
+  },
+  "keywords": [
+    "redux",
+    "listener",
+    "remove"
+  ],
+  "author": "cuijiemmx",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "redux": "^3.7.2"
+  }
+}
