@@ -1,70 +1,50 @@
-import api from './api'
+const wxApis = [
+  'getStorage',
+  'setStorage',
+  'removeStorage',
+  'clearStorage',
+  'getStorageInfo'
+]
+
+let api = Object.create(null)
+
+wxApis.forEach(name => {
+  api[name] = args => new Promise(function(resolve, reject) {
+    wx[name]({
+      ...args,
+
+      success: function(res) {
+        resolve(res)
+      },
+      fail: function(res) {
+        reject(res)
+      }
+    })
+  })
+})
 
 export default {
-
-  /**
-   * @param key
-   * @param callback
-   * @returns {*}
-   */
-  async getItem(key, callback) {
-    try {
-      let res = await api.getStorage({ key })
-      if (callback) callback(null, res.data)
+  getItem(key) {
+    return api.getStorage({ key }).then(res => {
       return res.data
-    } catch (error) {
-      if (callback) callback(error)
-      throw error
-    }
+    })
   },
 
-  /**
-   * @param key
-   * @param data
-   * @param callback
-   */
-  async setItem(key, data, callback) {
-    try {
-      await api.setStorage({ key, data })
-      if (callback) callback(null)
-    } catch (error) {
-      if (callback) callback(error)
-      throw error
-    }
+  setItem(key, data) {
+    return api.setStorage({ key, data })
   },
 
-  /**
-   * @param key
-   * @param callback
-   */
-  async removeItem(key, callback) {
-    try {
-      await api.removeStorage({ key })
-      if (callback) callback(null)
-    } catch (error) {
-      if (callback) callback(error)
-      throw error
-    }
+  removeItem(key) {
+    return api.removeStorage({ key })
   },
 
-  /**
-   * @param callback
-   */
-  async clear(callback) {
-    await api.clearStorage()
-    if (callback) callback(null)
+  clear() {
+    return api.clearStorage()
   },
 
-  /**
-   * @param callback
-   */
-  async getAllKeys(callback) {
-    try {
-      let res = await api.getStorageInfo()
-      if (callback) callback(null, res.keys)
-    } catch (error) {
-      if (callback) callback(error)
-      throw error
-    }
+  getAllKeys() {
+    return api.getStorageInfo().then(res => {
+      return res.keys
+    })
   }
 }
