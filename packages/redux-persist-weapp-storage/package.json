@@ -1,6 +1,6 @@
 {
   "name": "redux-persist-weapp-storage",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "redux-persist storage engine for wechat app",
   "main": "lib/index.js",
   "scripts": {
