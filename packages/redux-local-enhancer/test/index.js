@@ -1,4 +1,4 @@
-import { localsEnhancer, local, localsReducer } from '../src'
+import { localsEnhancer, localsReducer } from '../src'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { takeEvery, put } from 'redux-saga/effects'
 import createSagaMiddleware from 'redux-saga'
@@ -50,13 +50,16 @@ const sm2 = createSagaMiddleware()
 
 const store = createStore(rootReducer, compose(localsEnhancer(state => state._locals), applyMiddleware(sm)))
 
-const local1 = store.local('1', countReducer, 1, applyMiddleware(sm1))
-const local2 = store.local('2', countReducer, 2, applyMiddleware(sm2))
+console.log(store.local('1').created)
+
+const local1 = store.local('1').createStore(countReducer, 1, applyMiddleware(sm1))
+const local2 = store.local('2').createStore(countReducer, 2, applyMiddleware(sm2))
+
+console.log(store.local('1').created)
 
 sm.run(saga)
 sm1.run(saga1)
 sm2.run(saga2)
-
 
 console.log(store.getState())
 
@@ -83,7 +86,7 @@ store.dispatch({ type: INC })
 
 console.log(store.getState())
 
-store.dispatch(local('1')({ type: INC }))
-store.dispatch(local('2')({ type: DEC }))
+store.local('1').dispatch({ type: INC })
+store.local('2').dispatch({ type: DEC })
 
 console.log(store.getState())
