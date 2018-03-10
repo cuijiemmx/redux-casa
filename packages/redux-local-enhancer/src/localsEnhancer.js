@@ -80,19 +80,35 @@ export default function(localsStateMapper) {
           getState,
           replaceReducer,
           subscribe,
-          dispose,
-          created: true
+          dispose
         }
 
         return locals[key]
       }
 
+      function findOrCreate(...args) {
+        if (key in locals) {
+          return locals[key]
+        } else {
+          return {
+            ...create(...args),
+            created: true,
+            findOrCreate
+          }
+        }
+      }
+
       if (key in locals) {
-        return locals[key]
+        return {
+          ...locals[key],
+          created: true,
+          findOrCreate
+        }
       } else {
         return {
-          createStore: create,
-          created: false
+          create,
+          created: false,
+          findOrCreate
         }
       }
     }

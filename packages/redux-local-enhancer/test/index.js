@@ -52,8 +52,8 @@ const store = createStore(rootReducer, compose(localsEnhancer(state => state._lo
 
 console.log(store.local('1').created)
 
-const local1 = store.local('1').createStore(countReducer, 1, applyMiddleware(sm1))
-const local2 = store.local('2').createStore(countReducer, 2, applyMiddleware(sm2))
+const local1 = store.local('1').create(countReducer, 1, applyMiddleware(sm1))
+const local2 = store.local('2').findOrCreate(countReducer, 2, applyMiddleware(sm2))
 
 console.log(store.local('1').created)
 
