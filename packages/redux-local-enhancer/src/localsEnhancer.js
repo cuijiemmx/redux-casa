@@ -1,5 +1,6 @@
 import localAction from './localAction'
 import types from './types'
+import uuid from 'uuid/v4'
 
 export default function(localsStateMapper) {
   return createStore => (reducer, ...args) => {
@@ -7,7 +8,7 @@ export default function(localsStateMapper) {
 
     const locals = Object.create(null)
 
-    function local(key) {
+    function local(key = uuid()) {
       function create(localReducer, localPreloadedState, localEnhancer) {
         if (typeof localPreloadedState === 'function' && typeof localEnhancer === 'undefined') {
           localEnhancer = localPreloadedState

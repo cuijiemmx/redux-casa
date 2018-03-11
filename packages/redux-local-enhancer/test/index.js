@@ -53,7 +53,7 @@ const store = createStore(rootReducer, compose(localsEnhancer(state => state._lo
 console.log(store.local('1').created)
 
 const local1 = store.local('1').create(countReducer, 1, applyMiddleware(sm1))
-const local2 = store.local('2').findOrCreate(countReducer, 2, applyMiddleware(sm2))
+const local2 = store.local().findOrCreate(countReducer, 2, applyMiddleware(sm2))
 
 console.log(store.local('1').created)
 
@@ -87,6 +87,6 @@ store.dispatch({ type: INC })
 console.log(store.getState())
 
 store.local('1').dispatch({ type: INC })
-store.local('2').dispatch({ type: DEC })
+// store.local('2').dispatch({ type: DEC })
 
 console.log(store.getState())

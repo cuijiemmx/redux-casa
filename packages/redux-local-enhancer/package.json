@@ -1,6 +1,6 @@
 {
   "name": "redux-local-enhancer",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Create virtual local stores from redux root store, you can use virtual stores as usual, virtual store support all existing redux middlewares, the action dispatched from a virtual store won't influence the other virtual stores, so this is a great solution if you want to support multipe instances of the same component",
   "main": "lib/index.js",
   "scripts": {
@@ -20,5 +20,8 @@
     "babel-preset-env": "^1.6.1",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0"
+  },
+  "dependencies": {
+    "uuid": "^3.2.1"
   }
 }
