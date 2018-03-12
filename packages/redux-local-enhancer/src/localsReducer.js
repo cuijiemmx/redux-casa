@@ -12,16 +12,22 @@ function localReducerEnhancer(key, reducer) {
 
 export default function(localsState = {}, action) {
   if (action.type === types.CREATE_LOCAL) {
-    let { key, reducer, initialState } = action.payload
+    const { key, reducer, initialState } = action.payload
     return {
       [key]: { reducer, state: reducer(initialState, action) },
       ...localsState
     }
+  } else if (action.type === types.DISPOSE_LOCAL) {
+    const key = action.payload.key
+    const {
+      [key]: _, ...nextLocalsState
+    } = localsState
+    return nextLocalsState
   } else {
-    let nextLocalsState = {}
+    const nextLocalsState = {}
     const keys = Object.keys(localsState)
     keys.forEach(key => {
-      let { reducer, state } = localsState[key]
+      const { reducer, state } = localsState[key]
       nextLocalsState[key] = { reducer, state: localReducerEnhancer(key, reducer)(state, action) }
     })
     return nextLocalsState

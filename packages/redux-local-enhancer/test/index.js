@@ -90,3 +90,7 @@ store.local('1').dispatch({ type: INC })
 // store.local('2').dispatch({ type: DEC })
 
 console.log(store.getState())
+
+store.local('1').dispose()
+
+console.log(store.getState())

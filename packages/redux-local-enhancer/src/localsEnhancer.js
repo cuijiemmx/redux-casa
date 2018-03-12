@@ -66,8 +66,12 @@ export default function(localsStateMapper) {
 
         function dispose() {
           ensureLocal()
-          const state = store.getState()
-          delete localsStateMapper(state)[key]
+          store.dispatch({
+            type: types.DISPOSE_LOCAL,
+            payload: {
+              key
+            }
+          })
         }
 
         function subscribe(listener) {
